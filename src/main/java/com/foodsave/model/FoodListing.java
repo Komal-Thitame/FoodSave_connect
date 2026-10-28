@@ -1,76 +1,98 @@
+
 package com.foodsave.model;
 
 import jakarta.persistence.*;
-import jakarta.validation.constraints.NotBlank;
-import lombok.*;
-import org.hibernate.annotations.CreationTimestamp;
-import org.hibernate.annotations.UpdateTimestamp;
-
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 @Entity
 @Table(name = "food_listings")
-@Getter
-@Setter
-@NoArgsConstructor
-@AllArgsConstructor
-@Builder
 public class FoodListing {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @NotBlank
-    @Column(nullable = false)
-    private String title;
-
-    @Column(columnDefinition = "TEXT")
-    private String description;
-
-    @NotBlank
-    @Column(nullable = false)
-    private String category;
-
-    @Column(nullable = false)
+    private String foodName;
+    private String donorName;
     private Integer quantity;
+    private String quantityUnit;
+    private LocalDateTime preparedAt;
+    private LocalDateTime pickupDeadline;
+    private String pickupAddress;
+    private String status;
 
-    private String unit;
-
-    @Column(name = "expiry_date")
-    private LocalDate expiryDate;
-
-    @Enumerated(EnumType.STRING)
-    @Column(nullable = false)
-    private FreshnessStatus freshnessStatus = FreshnessStatus.FRESH;
-
-    @Enumerated(EnumType.STRING)
-    @Column(nullable = false)
-    private ListingStatus status = ListingStatus.AVAILABLE;
-
-    private String location;
-
-    @Column(name = "image_url")
-    private String imageUrl;
-
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "donor_id", nullable = false)
-    private User donor;
-
-    @CreationTimestamp
-    @Column(name = "created_at", updatable = false)
-    private LocalDateTime createdAt;
-
-    @UpdateTimestamp
-    @Column(name = "updated_at")
-    private LocalDateTime updatedAt;
-
-    public enum FreshnessStatus {
-        FRESH, GOOD, NEAR_EXPIRY, EXPIRED
+    public FoodListing() {
     }
 
-    public enum ListingStatus {
-        AVAILABLE, RESERVED, CLAIMED, EXPIRED
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public String getFoodName() {
+        return foodName;
+    }
+
+    public void setFoodName(String foodName) {
+        this.foodName = foodName;
+    }
+
+    public String getDonorName() {
+        return donorName;
+    }
+
+    public void setDonorName(String donorName) {
+        this.donorName = donorName;
+    }
+
+    public Integer getQuantity() {
+        return quantity;
+    }
+
+    public void setQuantity(Integer quantity) {
+        this.quantity = quantity;
+    }
+
+    public String getQuantityUnit() {
+        return quantityUnit;
+    }
+
+    public void setQuantityUnit(String quantityUnit) {
+        this.quantityUnit = quantityUnit;
+    }
+
+    public LocalDateTime getPreparedAt() {
+        return preparedAt;
+    }
+
+    public void setPreparedAt(LocalDateTime preparedAt) {
+        this.preparedAt = preparedAt;
+    }
+
+    public LocalDateTime getPickupDeadline() {
+        return pickupDeadline;
+    }
+
+    public void setPickupDeadline(LocalDateTime pickupDeadline) {
+        this.pickupDeadline = pickupDeadline;
+    }
+
+    public String getPickupAddress() {
+        return pickupAddress;
+    }
+
+    public void setPickupAddress(String pickupAddress) {
+        this.pickupAddress = pickupAddress;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
     }
 }
