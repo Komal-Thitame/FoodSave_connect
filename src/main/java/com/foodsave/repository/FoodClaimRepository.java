@@ -1,3 +1,4 @@
+
 package com.foodsave.repository;
 
 import com.foodsave.model.FoodClaim;
@@ -9,11 +10,9 @@ import java.util.List;
 @Repository
 public interface FoodClaimRepository extends JpaRepository<FoodClaim, Long> {
 
-    List<FoodClaim> findByClaimerId(Long claimerId);
+    List<FoodClaim> findByClaimer_Id(Long claimerId);
 
-    List<FoodClaim> findByListingId(Long listingId);
+    List<FoodClaim> findByListing_Id(Long listingId);
 
-    List<FoodClaim> findByListingDonorId(Long donorId);
-
-    boolean existsByListingIdAndClaimerId(Long listingId, Long claimerId);
+    boolean existsByListing_IdAndClaimer_Id(Long listingId, Long claimerId);
 }
